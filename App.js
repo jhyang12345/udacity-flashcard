@@ -5,6 +5,7 @@ import { StyleSheet,
           Platform,
           StatusBar,
        } from 'react-native';
+import { Header } from 'react-native-elements'
 import { createAppContainer, 
         createBottomTabNavigator,
         createDrawerNavigator } from 'react-navigation'
@@ -12,6 +13,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { Constatns, Constants } from 'expo'
 import reducer from './reducers'
+import AppHeader from './components/AppHeader'
 import DeckView from './components/DeckView'
 import AddDeckView from './components/AddDeckView'
 import {purple, white} from "./utils/colors"
@@ -20,16 +22,16 @@ import {purple, white} from "./utils/colors"
 export default class App extends React.Component {
 
   componentDidMount = () => {
-    console.log(this.props)
-    
+
   }
 
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
-          <AppStatusBar backgroundColor={"#333"} barStyle='light-content'/>
-          <Text>Something to show</Text>
+          <AppStatusBar backgroundColor={"#888"} barStyle="light-content" />
+
+          <AppHeader/>
           <AppContainer />
         </View>
       </Provider>
@@ -55,8 +57,9 @@ const RouteConfigs = {
 }
 
 const TabNavigatorConfig = {
-  navigationOptions: {
-    header: null
+  initialRouteName: "Decks",
+  headerStyle: {
+    backgroundColor: purple,
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === "ios" ? purple : white,
@@ -74,10 +77,10 @@ const TabNavigatorConfig = {
   }
 };
 
-const Tabs = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
-  // Platform.OS === "ios"
-  //   ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
-  //   : createBottomTabNavigator(RouteConfigs, TabNavigatorConfig);
+const Tabs =
+  Platform.OS === "ios"
+    ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
+    : createDrawerNavigator(RouteConfigs, TabNavigatorConfig);
 
 const AppContainer = createAppContainer(Tabs)
 
@@ -87,16 +90,6 @@ const styles = StyleSheet.create({
 
   },
 });
-
-class AppHeader extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text>Something</Text>
-      </View>
-    )
-  }
-}
 
 function AppStatusBar ({backgroundColor, ...props}) {
   return (
