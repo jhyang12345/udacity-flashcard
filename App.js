@@ -4,6 +4,7 @@ import { StyleSheet,
           View,
           Platform,
           StatusBar,
+          ToolbarAndroid,
        } from 'react-native';
 import { Header } from 'react-native-elements'
 import { createAppContainer, 
@@ -11,13 +12,10 @@ import { createAppContainer,
         createDrawerNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { Constatns, Constants } from 'expo'
+import { Constants } from 'expo'
 import reducer from './reducers'
-import AppHeader from './components/AppHeader'
-import DeckView from './components/DeckView'
-import AddDeckView from './components/AddDeckView'
-import {purple, white} from "./utils/colors"
 
+import AppContainer from './components/AppContainer'
 
 export default class App extends React.Component {
 
@@ -29,60 +27,36 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
+          {/* <StatusBar
+            translucent
+            backgroundColor="rgba(0, 0, 0, 0.24)"
+            animated
+          />
+          {Platform.OS === "android" && Platform.Version >= 20 ? (
+            <View
+              style={{
+                height: 24,
+                backgroundColor: "#512DA8"
+              }}
+            />
+          ) : null}
+          <ToolbarAndroid
+            style={{
+              height: 56,
+              backgroundColor: "#673AB7",
+              elevation: 4
+            }}
+            navIcon="menu"
+            titleColor="white"
+            title="CheeseSquare"
+          /> */}
           <AppStatusBar backgroundColor={"#888"} barStyle="light-content" />
-
-          <AppHeader/>
           <AppContainer />
         </View>
       </Provider>
     );
   }
 }
-
-const RouteConfigs = {
-  Decks: {
-    screen: DeckView,
-    navigationOptions: {
-      tabBarLabel: "Decks",
-      // tabBarIcon: 
-    }
-  },
-  AddDeck: {
-    screen: AddDeckView,
-    navigationOptions: {
-      tabBarLabel: "Add Deck",
-      // tabBarIcon:
-    }
-  }
-}
-
-const TabNavigatorConfig = {
-  initialRouteName: "Decks",
-  headerStyle: {
-    backgroundColor: purple,
-  },
-  tabBarOptions: {
-    activeTintColor: Platform.OS === "ios" ? purple : white,
-    style: {
-      height: 56,
-      backgroundColor: Platform.OS === "ios" ? white : purple,
-      shadowColor: "rgba(0, 0, 0, 0.24)",
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
-    }
-  }
-};
-
-const Tabs =
-  Platform.OS === "ios"
-    ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
-    : createDrawerNavigator(RouteConfigs, TabNavigatorConfig);
-
-const AppContainer = createAppContainer(Tabs)
 
 const styles = StyleSheet.create({
   container: {
@@ -93,8 +67,8 @@ const styles = StyleSheet.create({
 
 function AppStatusBar ({backgroundColor, ...props}) {
   return (
-    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props}></StatusBar>
+    <View style={{cheight: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} animated {...props}></StatusBar>
     </View>
   )
 }

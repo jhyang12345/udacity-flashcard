@@ -5,6 +5,10 @@ import { Header } from 'react-native-elements'
 
 class AppHeader extends React.Component {
 
+    componentDidMount() {
+        console.log("AppHeader", this.props)
+    }
+
     render() {
         return (
             <Header
