@@ -15,10 +15,13 @@ import { Icon } from "react-native-elements";
 const DeckNavigator = createStackNavigator({
   Decks: {
     screen: DeckView,
-    navigationOptions: {
-      tabBarLabel: "Decks",
-      header: <AppHeader />
-      // tabBarIcon:
+    navigationOptions: ({navigation}) => {
+        console.log("DeckView", navigation)
+        return({
+            tabBarLabel: "Decks",
+            header: <AppHeader navigation={navigation}/>
+            // tabBarIcon:
+        })
     }
   }
 });
@@ -26,11 +29,11 @@ const DeckNavigator = createStackNavigator({
 const AddDeckNavigator = createStackNavigator({
   AddDeck: {
     screen: AddDeckView,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       tabBarLabel: "Add Deck",
-      header: <AppHeader />
+      header: <AppHeader navigation={navigation} />
       // tabBarIcon:
-    }
+    })
   }
 });
 
@@ -41,9 +44,12 @@ const drawerScreens = createDrawerNavigator(
   },
   {
     initialRouteName: "Decks",
-    navigationOptions: ({ navigation }) => ({
-      header: null
-    })
+    navigationOptions: ({ navigation }) => {
+        console.log("drawerScreen", navigation)
+        return ({
+            header: null
+        })
+    }
   }
 );
 
