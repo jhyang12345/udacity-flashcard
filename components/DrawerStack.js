@@ -30,7 +30,7 @@ const DeckNavigator = createStackNavigator({
   DeckDetail: {
       screen: DeckDetail,
       navigationOptions: ({navigation}) => {
-          render({
+          return({
               tabBarLabel: "Deck Detail",
               header: null,
           })

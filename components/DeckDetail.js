@@ -4,6 +4,7 @@ import { StyleSheet,
         View,
         Text
     } from 'react-native'
+import { connect } from 'react-redux'
 
 class DeckDetail extends React.Component {
     render() {
@@ -40,3 +41,5 @@ const styles = StyleSheet.create({
   },
 
 });
+
+export default connect()(DeckDetail)
