@@ -9,6 +9,7 @@ import {
 import AppHeader from "./AppHeader";
 import DeckView from "./DeckView";
 import AddDeckView from "./AddDeckView";
+import DrawerStack from './DrawerStack';
 import { blue, white } from "../utils/colors";
 import { Icon } from "react-native-elements";
 
@@ -16,16 +17,20 @@ const RouteConfigs = {
   Decks: {
     screen: DeckView,
     navigationOptions: {
-      tabBarLabel: "Decks"
-      //   header: <AppHeader />
+        tabBarLabel: "Decks",
+        header: (
+            <AppHeader />
+        ),
       // tabBarIcon:
     }
   },
   AddDeck: {
     screen: AddDeckView,
     navigationOptions: {
-      tabBarLabel: "Add Deck"
-      // header: <AppHeader />,
+        tabBarLabel: "Add Deck",
+        header: (
+            <AppHeader />
+        ),
       // tabBarIcon:
     }
   }
@@ -55,35 +60,43 @@ const TabNavigatorConfig = {
 // View does not provide onPress functionality
 const DrawerNavigatorConfig = {
   initialRouteName: "Decks",
-  headerMode: "float",
-  navigationOptions: ({ navigation }) => ({
-    headerStyle: { backgroundColor: blue },
-    title: "Welcome!",
-    headerTintColor: "white",
-    headerLeft: (
-      <View style={{ color: white, paddingLeft: 12, paddingRight: 12 }}>
-        <TouchableWithoutFeedback onPress={() => navigation.openDrawer()}>
-          <Icon
-            name="menu"
-            type="material"
-            color="#FFF"
-          />
-        </TouchableWithoutFeedback>
-      </View>
-    )
-  })
+//   headerMode: "float",
+//   navigationOptions: ({ navigation }) => {
+//     const {index, routes} = navigation.state
+//     console.log(index, routes[index])
+//     return ({
+//     headerStyle: { backgroundColor: blue },
+//     title: "Welcome!",
+//     headerTintColor: "white",
+//     headerLeft: (
+//       <View style={{ color: white, paddingLeft: 12, paddingRight: 12 }}>
+//         <TouchableWithoutFeedback onPress={() => navigation.openDrawer()}>
+//           <Icon
+//             name="menu"
+//             type="material"
+//             color="#FFF"
+//           />
+//         </TouchableWithoutFeedback>
+//       </View>
+//     )
+//   })}
 };
 
-const androidStackNav = createStackNavigator({
-  RootStack: {
-    screen: createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+const androidStackNav = createStackNavigator(
+  {
+    RootStack: {
+      screen: createDrawerNavigator(RouteConfigs, DrawerNavigatorConfig)
+    }
+  },
+  {
+    initialRouteName: "RootStack"
   }
-});
+);
 
 const Tabs =
   Platform.OS === "ios"
     ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
-    : androidStackNav;
+    : DrawerStack
 
 const AppContainer = createAppContainer(Tabs);
 
