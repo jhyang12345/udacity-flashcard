@@ -2,30 +2,37 @@ import React, { Component, } from "react";
 import { Text, 
         View, 
         StyleSheet, 
-        TouchableOpacity
+        TouchableOpacity,
+        TouchableWithoutFeedback
      } from "react-native";
 import { connect } from "react-redux";
 
 class DeckView extends Component {
     componentDidMount() {
-        const { navigation } = this.props;
         
+    }
+
+    touchCallback = () => {
+        const { navigation } = this.props;
+        console.log(this.props)
+        navigation.navigate(
+            'DeckDetail',
+        )
     }
 
     render() {
         return (
           <View style={styles.container}>
-            <Text 
-                className="deckName"
-                style={styles.deckName}>
-                DeckView
-            </Text>
-            <Text
-                className="cardCount"
-                style={styles.cardCount}
-                >
-                2 cards
-            </Text>
+            <TouchableWithoutFeedback onPress={this.touchCallback}>
+              <View>
+                <Text className="deckName" style={styles.deckName}>
+                  DeckView
+                </Text>
+                <Text className="cardCount" style={styles.cardCount}>
+                  2 cards
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         );
     }

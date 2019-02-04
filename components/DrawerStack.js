@@ -9,6 +9,7 @@ import {
 import AppHeader from "./AppHeader";
 import DeckView from "./DeckView";
 import AddDeckView from "./AddDeckView";
+import DeckDetail from "./DeckDetail"
 import { blue, white } from "../utils/colors";
 import { Icon } from "react-native-elements";
 
@@ -16,22 +17,39 @@ const DeckNavigator = createStackNavigator({
   Decks: {
     screen: DeckView,
     navigationOptions: ({navigation}) => {
-        console.log("DeckView", navigation)
         return({
             tabBarLabel: "Decks",
-            header: <AppHeader navigation={navigation}/>
+            header: <AppHeader 
+                navigation={navigation}
+                title={"Decks"}
+                />
             // tabBarIcon:
         })
-    }
+    },
+  },
+  DeckDetail: {
+      screen: DeckDetail,
+      navigationOptions: ({navigation}) => {
+          render({
+              tabBarLabel: "Deck Detail",
+              header: null,
+          })
+      }
   }
-});
+}, {
+    initialRouteName: "Decks",
+}
+);
 
 const AddDeckNavigator = createStackNavigator({
   AddDeck: {
     screen: AddDeckView,
     navigationOptions: ({ navigation }) => ({
       tabBarLabel: "Add Deck",
-      header: <AppHeader navigation={navigation} />
+      header: <AppHeader 
+        navigation={navigation} 
+        title={"Add Deck"}
+        />
       // tabBarIcon:
     })
   }

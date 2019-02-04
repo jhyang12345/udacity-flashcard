@@ -11,7 +11,7 @@ import DeckView from "./DeckView";
 import AddDeckView from "./AddDeckView";
 import DrawerStack from './DrawerStack';
 import { blue, white } from "../utils/colors";
-import { Icon } from "react-native-elements";
+
 
 const RouteConfigs = {
   Decks: {

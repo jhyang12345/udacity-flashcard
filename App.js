@@ -52,7 +52,7 @@ export default class App extends React.Component {
           /> */}
           <AppStatusBar backgroundColor={"#888"} barStyle="light-content" />
           <AppContainer />
-        </View>
+        </Vi    ew>
       </Provider>
     );
   }

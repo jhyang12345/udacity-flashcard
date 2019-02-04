@@ -16,7 +16,7 @@ class AppHeader extends React.Component {
     }
 
     render() {
-        const { navigation } = this.props
+        const { navigation, title } = this.props
         
         return (
             <Header
@@ -26,13 +26,13 @@ class AppHeader extends React.Component {
                 }}
                 leftComponent={<LeftComponent navigation={navigation}/>}
                 centerComponent={{
-                    text: "MY TITLE",
-                    style: { color: "#fff" }
+                    text: title,
+                    style: { color: "#fff", fontSize: 22 }
                 }}
-                rightComponent={{
-                    icon: "home",
-                    color: "#fff"
-                }}
+                // rightComponent={{
+                //     icon: "home",
+                //     color: "#fff"
+                // }}
                 containerStyle={{
                     backgroundColor: blue,
                 }}
@@ -44,7 +44,6 @@ class AppHeader extends React.Component {
 class LeftComponent extends React.Component {
 
     pressIcon = () => {
-        console.log(this.props)
         const { navigation } = this.props
         navigation.openDrawer()
     }
