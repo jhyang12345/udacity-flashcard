@@ -63,7 +63,6 @@ const drawerScreens = createDrawerNavigator(
   {
     initialRouteName: "Decks",
     navigationOptions: ({ navigation }) => {
-        console.log("drawerScreen", navigation)
         return ({
             header: null
         })

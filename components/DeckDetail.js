@@ -11,12 +11,17 @@ class DeckDetail extends React.Component {
 
         return (
           <View style={styles.container}>
-            <Text className="deckName" style={styles.deckName}>
-              Detail Deck
-            </Text>
-            <Text className="cardCount" style={styles.cardCount}>
-              2 cards
-            </Text>
+            <View style={styles.topHalf}>
+              <Text className="deckName" style={styles.deckName}>
+                Detail Deck
+              </Text>
+              <Text className="cardCount" style={styles.cardCount}>
+                2 cards
+              </Text>
+            </View>
+            <View style={[styles.container, {backgroundColor: "#CCC"}]}>
+
+            </View>
           </View>
         );
     }
@@ -25,6 +30,11 @@ class DeckDetail extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  topHalf: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   deckName: {
     justifyContent: "center",
