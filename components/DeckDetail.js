@@ -12,6 +12,9 @@ class DeckDetail extends React.Component {
     addCardCallback = () => {
         const { navigation } = this.props
         console.log("addCardCallback", navigation)
+        navigation.navigate(
+            "AddCard",
+        )
     }
 
     render() {

@@ -10,35 +10,44 @@ import AppHeader from "./AppHeader";
 import DeckView from "./DeckView";
 import AddDeckView from "./AddDeckView";
 import DeckDetail from "./DeckDetail"
+import AddCardView from "./AddCardView"
 import { blue, white } from "../utils/colors";
 import { Icon } from "react-native-elements";
 
-const DeckNavigator = createStackNavigator({
-  Decks: {
-    screen: DeckView,
-    navigationOptions: ({navigation}) => {
-        return({
-            tabBarLabel: "Decks",
-            header: <AppHeader 
-                navigation={navigation}
-                title={"Decks"}
-                />
-            // tabBarIcon:
-        })
-    },
-  },
-  DeckDetail: {
-      screen: DeckDetail,
-      navigationOptions: ({navigation}) => {
-          return({
-              tabBarLabel: "Deck Detail",
-              header: null,
-          })
+const DeckNavigator = createStackNavigator(
+  {
+    Decks: {
+      screen: DeckView,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Decks",
+          header: <AppHeader navigation={navigation} title={"Decks"} />
+          // tabBarIcon:
+        };
       }
+    },
+    DeckDetail: {
+      screen: DeckDetail,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Deck Detail",
+          header: null
+        };
+      }
+    },
+    AddCard: {
+      screen: AddCardView,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Add Card",
+          header: null
+        };
+      }
+    }
+  },
+  {
+    initialRouteName: "Decks"
   }
-}, {
-    initialRouteName: "Decks",
-}
 );
 
 const AddDeckNavigator = createStackNavigator({

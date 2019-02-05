@@ -1,11 +1,27 @@
 import React, { Component } from "react";
-import { Text, View } from 'react-native'
+import { StyleSheet,
+        Text, 
+        View,
+        TextInput,
+        TouchableOpacity,
+    } from 'react-native'
 import { connect } from "react-redux";
 
 class AddDeckView extends Component {
   render() {
-    return <Text>AddDeckView</Text>;
+    return (
+        <View style={styles.container}>
+
+        </View>
+    )
+    
   }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+})
 
 export default connect()(AddDeckView);
