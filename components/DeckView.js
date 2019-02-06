@@ -33,13 +33,6 @@ class DeckView extends Component {
         
     }
 
-    touchCallback = () => {
-        const { navigation } = this.props;
-        navigation.navigate(
-            'DeckDetail',
-        )
-    }
-
     render() {
         const { deckList } = this.state
         return (
@@ -51,6 +44,7 @@ class DeckView extends Component {
                     <DeckComponent 
                         deck={deck}
                         key={deck.id}
+                        navigation={this.props.navigation}
                     />
                 ))
               }

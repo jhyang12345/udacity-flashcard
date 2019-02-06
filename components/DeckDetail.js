@@ -18,6 +18,8 @@ class DeckDetail extends React.Component {
     }
 
     render() {
+     console.log("Detail view", this.props.navigation.state.params) 
+
         return (
           <View style={styles.container}>
             <View style={styles.topHalf}>

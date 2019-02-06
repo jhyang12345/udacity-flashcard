@@ -9,27 +9,33 @@ import {
 import { connect } from "react-redux"
 
 class DeckComponent extends Component {
-    componentDidMount() {
-        
-    }
+  componentDidMount() {}
 
-    render() {
-        const { deck } = this.props
-        
-        return (
-          <TouchableWithoutFeedback 
-            onPress={this.touchCallback}>
-            <View>
-              <Text className="deckName" style={styles.deckName}>
-                {deck.title}
-              </Text>
-              <Text className="cardCount" style={styles.cardCount}>
-                {deck.cards.length} cards
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
-        );
-    }
+  touchCallback = () => {
+    const { deck, navigation } = this.props;
+    console.log("Navigation", this.props)
+    navigation.navigate(
+        "DeckDetail",
+        {deckId: deck.id}
+    );
+  };
+
+  render() {
+    const { deck } = this.props;
+
+    return (
+      <TouchableWithoutFeedback onPress={this.touchCallback}>
+        <View>
+          <Text className="deckName" style={styles.deckName}>
+            {deck.title}
+          </Text>
+          <Text className="cardCount" style={styles.cardCount}>
+            {deck.cards.length} cards
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
