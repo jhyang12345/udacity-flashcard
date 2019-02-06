@@ -23,7 +23,7 @@ class AddDeckView extends Component {
           <TextInput
             style={styles.textInput}
             onChangeText={deckTitle => this.setState({ deckTitle })}
-            placeholder={"Question"}
+            placeholder={"Deck Title"}
             value={this.state.question}
           />
         </View>
@@ -57,9 +57,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#333"
   },
+  textInput: {
+    alignSelf: "stretch",
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 20,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 2,
+    paddingBottom: 2,
+    fontSize: 16,
+    borderColor: "#333",
+    borderWidth: 1,
+    borderRadius: 3
+  },
   deckQuestion: {
     fontSize: 24,
-  },
+    textAlign: "center"
+  }
 });
 
 export default connect()(AddDeckView);
