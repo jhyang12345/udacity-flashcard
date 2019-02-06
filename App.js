@@ -14,6 +14,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { middleware } from './middleware'
 import { Constants } from 'expo'
+import { receiveDecks } from './actions'
 import reducer from './reducers'
 
 import AppContainer from './components/AppContainer'
@@ -23,7 +24,7 @@ const store = createStore(reducer, middleware)
 export default class App extends React.Component {
 
   componentDidMount = () => {
-    console.log("Current store", store)
+    store.dispatch(receiveDecks())
   }
 
   render() {
@@ -41,7 +42,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
 });
 

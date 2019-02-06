@@ -2,26 +2,46 @@ import React, { Component, } from "react";
 import { Text, 
         View, 
         StyleSheet, 
-        TouchableOpacity,
-        TouchableWithoutFeedback
+        
      } from "react-native";
 import { connect } from "react-redux";
 import DeckComponent from "./DeckComponent"
+import { fetchDecks } from '../utils/api'
 
 class DeckView extends Component {
+    state = {
+        deckList: [],
+    }
+
     componentDidMount() {
+        console.log("Decks", this.props)
+        fetchDecks()
+            .then((results) => {
+                this.setDeckList(results)
+            })
+    }
+
+    setDeckList = (results) => {
+        const deckList = []
+        for (let id in results) {
+            deckList.push(results[id])
+        }
+        deckList.sort((a, b) => (parseInt(b.id) - parseInt(a.id)))
+        this.setState(() => ({
+            deckList: deckList,
+        }))
         
     }
 
     touchCallback = () => {
         const { navigation } = this.props;
-        console.log(this.props)
         navigation.navigate(
             'DeckDetail',
         )
     }
 
     render() {
+        console.log("State decklist", this.state.deckList)
         return (
           <View style={styles.container}>
             <View style={styles.currentDeckContainer}>
@@ -61,4 +81,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect()(DeckView)
+function mapStateToProps({ decks }) {
+    return {
+        decks,
+    }
+}
+
+export default connect(mapStateToProps)(DeckView)
