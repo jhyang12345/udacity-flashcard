@@ -10,19 +10,21 @@ import { connect } from "react-redux"
 
 class DeckComponent extends Component {
     componentDidMount() {
-
+        
     }
 
     render() {
+        const { deck } = this.props
+        
         return (
           <TouchableWithoutFeedback 
             onPress={this.touchCallback}>
             <View>
               <Text className="deckName" style={styles.deckName}>
-                DeckView
+                {deck.title}
               </Text>
               <Text className="cardCount" style={styles.cardCount}>
-                2 cards
+                {deck.cards.length} cards
               </Text>
             </View>
           </TouchableWithoutFeedback>

@@ -41,12 +41,19 @@ class DeckView extends Component {
     }
 
     render() {
-        console.log("State decklist", this.state.deckList)
+        const { deckList } = this.state
         return (
           <View style={styles.container}>
             <View style={styles.currentDeckContainer}>
               <Text style={styles.currentDecks}>Current Decks</Text>
-              <DeckComponent />
+              {
+                deckList.map((deck) => (
+                    <DeckComponent 
+                        deck={deck}
+                        key={deck.id}
+                    />
+                ))
+              }
             </View>
           </View>
         );
