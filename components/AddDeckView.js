@@ -6,11 +6,30 @@ import { StyleSheet,
         TouchableOpacity,
     } from 'react-native'
 import { connect } from "react-redux";
+import { timeToString } from "../utils/helpers"
+import { addDeck } from "../actions"
 
 class AddDeckView extends Component {
   state = {
     deckTitle: ""
   };
+
+  submit = () => {
+    const { dispatch, navigation } = this.props
+
+    const deck = {
+      id: timeToString(),
+      title: this.state.deckTitle,
+      cards: [],
+    }
+
+    dispatch(
+      addDeck(deck)
+    )
+
+    // navigate to Decks view after new deck is created
+    navigation.navigate("Decks")
+  }
 
   render() {
     return (
@@ -28,7 +47,9 @@ class AddDeckView extends Component {
           />
         </View>
         <View style={styles.half}>
-          <TouchableOpacity style={styles.buttonStyle}>
+          <TouchableOpacity 
+            style={styles.buttonStyle}
+            onPress={this.submit}>
             <Text style={{ color: "#FFF" }}>Create Deck</Text>
           </TouchableOpacity>
         </View>

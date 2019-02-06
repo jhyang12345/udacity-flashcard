@@ -12,44 +12,24 @@ import { createAppContainer,
         createDrawerNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { middleware } from './middleware'
 import { Constants } from 'expo'
 import reducer from './reducers'
 
 import AppContainer from './components/AppContainer'
 
+const store = createStore(reducer, middleware)
+
 export default class App extends React.Component {
 
   componentDidMount = () => {
-
+    console.log("Current store", store)
   }
 
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={store}>
         <View style={styles.container}>
-          {/* <StatusBar
-            translucent
-            backgroundColor="rgba(0, 0, 0, 0.24)"
-            animated
-          />
-          {Platform.OS === "android" && Platform.Version >= 20 ? (
-            <View
-              style={{
-                height: 24,
-                backgroundColor: "#512DA8"
-              }}
-            />
-          ) : null}
-          <ToolbarAndroid
-            style={{
-              height: 56,
-              backgroundColor: "#673AB7",
-              elevation: 4
-            }}
-            navIcon="menu"
-            titleColor="white"
-            title="CheeseSquare"
-          /> */}
           <AppStatusBar backgroundColor={"#888"} barStyle="light-content" />
           <AppContainer />
         </View>

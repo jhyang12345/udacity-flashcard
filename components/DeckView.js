@@ -6,6 +6,7 @@ import { Text,
         TouchableWithoutFeedback
      } from "react-native";
 import { connect } from "react-redux";
+import DeckComponent from "./DeckComponent"
 
 class DeckView extends Component {
     componentDidMount() {
@@ -23,16 +24,10 @@ class DeckView extends Component {
     render() {
         return (
           <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={this.touchCallback}>
-              <View>
-                <Text className="deckName" style={styles.deckName}>
-                  DeckView
-                </Text>
-                <Text className="cardCount" style={styles.cardCount}>
-                  2 cards
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
+            <View style={styles.currentDeckContainer}>
+              <Text style={styles.currentDecks}>Current Decks</Text>
+              <DeckComponent />
+            </View>
           </View>
         );
     }
@@ -41,6 +36,15 @@ class DeckView extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    currentDeckContainer: {
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    currentDecks: {
+        textAlign: 'center',
+        fontSize: 30,
+        fontWeight: 'bold',
     },
     deckName: {
         justifyContent: 'center',
@@ -55,7 +59,6 @@ const styles = StyleSheet.create({
         color: "#999",
         textAlign: 'center',
     },
-
 })
 
 export default connect()(DeckView)
