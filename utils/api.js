@@ -13,6 +13,14 @@ export function fetchDecks() {
         // })
 }
 
+export function fetchDeckById(deckId) {
+    return AsyncStorage.getItem(DECK_STORAGE_KEY)
+        .then((result) => {
+            const decksObject = JSON.parse(result)
+            return decksObject[deckId]
+        })
+}
+
 export function submitDeck(deck) {
     const id = deck.id
     console.log("Submitting deck", deck)

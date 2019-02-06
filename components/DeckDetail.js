@@ -6,8 +6,30 @@ import { StyleSheet,
         TouchableOpacity,
     } from 'react-native'
 import { connect } from 'react-redux'
+import { fetchDeckById } from "../utils/api";
 
 class DeckDetail extends React.Component {
+
+    state = {
+      id: "",
+      title: "",
+      cards: [],
+    }
+
+    componentDidMount() {
+      const { deckId } = this.props.navigation.state.params
+
+      console.log(fetchDeckById)
+      fetchDeckById(deckId)
+      .then(deck => {
+        this.setState(() => ({
+          id: deck.id,
+          title: deck.title,
+          cards: deck.cards
+        }));
+      });
+
+    }
 
     addCardCallback = () => {
         const { navigation } = this.props
@@ -18,16 +40,16 @@ class DeckDetail extends React.Component {
     }
 
     render() {
-     console.log("Detail view", this.props.navigation.state.params) 
+     const { title, cards } = this.state
 
         return (
           <View style={styles.container}>
             <View style={styles.topHalf}>
               <Text className="deckName" style={styles.deckName}>
-                Detail Deck
+                {title}
               </Text>
               <Text className="cardCount" style={styles.cardCount}>
-                2 cards
+                {cards.length} cards
               </Text>
             </View>
             <View
