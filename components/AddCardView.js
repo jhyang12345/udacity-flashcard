@@ -21,6 +21,12 @@ class AddCardView extends React.Component {
       console.log("AddCardView", deckId)
     }
 
+    submit = () => {
+      const { question, answer } = this.state
+
+      console.log("CardView", question, answer)
+    }
+
     render() {
         return (
           <View style={styles.container}>
@@ -41,6 +47,7 @@ class AddCardView extends React.Component {
             <View style={styles.half}>
                 <TouchableOpacity
                     style={[styles.buttonStyle]}
+                    onPress={this.submit}
                     >
                     <Text style={{color: "#FFF"}}>Submit</Text>
                 </TouchableOpacity>

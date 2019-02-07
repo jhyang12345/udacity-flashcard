@@ -6,7 +6,7 @@ import { StyleSheet,
         TouchableOpacity,
     } from 'react-native'
 import { connect } from 'react-redux'
-import { fetchDeckById } from "../utils/api";
+import { fetchDeckById, removeDeck } from "../utils/api";
 
 class DeckDetail extends React.Component {
 
@@ -40,6 +40,17 @@ class DeckDetail extends React.Component {
         )
     }
 
+    deleteDeckCallback = () => {
+      const { navigation } = this.props
+      console.log("Deleting deck", this.state.id)
+      removeDeck(this.state.id)
+        .then((result) => {
+          navigation.navigate(
+            "Decks"
+          )
+        })
+    }
+
     render() {
      const { title, cards } = this.state
 
@@ -69,6 +80,7 @@ class DeckDetail extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.buttonStyle, styles.deleteDeck]}
+                onPress={this.deleteDeckCallback}
               >
                 <Text style={{ color: "#ff3b3f" }}>Delete Deck</Text>
               </TouchableOpacity>
