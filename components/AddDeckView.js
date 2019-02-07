@@ -8,6 +8,7 @@ import { StyleSheet,
 import { connect } from "react-redux";
 import { timeToString } from "../utils/helpers"
 import { addDeck } from "../actions"
+import { StackActions, NavigationActions } from 'react-navigation';
 
 class AddDeckView extends Component {
   state = {
@@ -28,7 +29,11 @@ class AddDeckView extends Component {
     )
 
     // navigate to Decks view after new deck is created
-    navigation.navigate("Decks")
+    navigation.navigate("Decks", {refresh: true})
+    // const pushAction = StackActions.push({
+    //   routeName: 'Decks',
+    // });
+    // this.props.navigation.dispatch(pushAction);
   }
 
   render() {
