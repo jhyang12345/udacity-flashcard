@@ -36,6 +36,7 @@ class DeckDetail extends React.Component {
         console.log("addCardCallback", navigation)
         navigation.navigate(
             "AddCard",
+            { deckId: this.state.id }
         )
     }
 

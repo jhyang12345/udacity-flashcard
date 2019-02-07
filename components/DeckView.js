@@ -2,7 +2,7 @@ import React, { Component, } from "react";
 import { Text, 
         View, 
         StyleSheet, 
-        
+        FlatList,
      } from "react-native";
 import { connect } from "react-redux";
 import DeckComponent from "./DeckComponent"
@@ -15,11 +15,22 @@ class DeckView extends Component {
 
     componentDidMount() {
         console.log("Decks", this.props)
+        this.handleDeckData()
+    }
+
+    handleDeckData = () => {
         fetchDecks()
             .then((results) => {
                 this.setDeckList(results)
             })
     }
+
+    willFocus = this.props.navigation.addListener(
+        'willFocus',
+        (payload) => {
+            this.handleDeckData();
+        }
+    );
 
     setDeckList = (results) => {
         const deckList = []
@@ -39,15 +50,17 @@ class DeckView extends Component {
           <View style={styles.container}>
             <View style={styles.currentDeckContainer}>
               <Text style={styles.currentDecks}>Current Decks</Text>
-              {
-                deckList.map((deck) => (
-                    <DeckComponent 
-                        deck={deck}
-                        key={deck.id}
-                        navigation={this.props.navigation}
-                    />
-                ))
-              }
+                
+                    {
+                        deckList.map((deck) => (
+                            <DeckComponent
+                                deck={deck}
+                                key={deck.id}
+                                navigation={this.props.navigation}
+                            />
+                        ))
+                    }
+
             </View>
           </View>
         );
