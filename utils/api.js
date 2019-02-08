@@ -46,6 +46,7 @@ export function removeDeck(deckId) {
 }
 
 export function addCardToDeck(deckId, card) {
+    console.log("Attempting to add card", deckId, card)
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
         .then((results) => {
             const data = JSON.parse(results)

@@ -17,19 +17,32 @@ class DeckDetail extends React.Component {
     }
 
     componentDidMount() {
-      const { deckId } = this.props.navigation.state.params
-
+      
       console.log(fetchDeckById)
-      fetchDeckById(deckId)
-      .then(deck => {
-        this.setState(() => ({
-          id: deck.id,
-          title: deck.title,
-          cards: deck.cards
-        }));
-      });
-
+      this.handleDeckData()
     }
+
+    handleDeckData = () => {
+      const { deckId } = this.props.navigation.state.params;
+
+      fetchDeckById(deckId)
+        .then(deck => {
+          console.log("Reloaded deck", deck)
+          this.setState(() => ({
+            id: deck.id,
+            title: deck.title,
+            cards: deck.cards
+          }));
+        });
+    }
+
+    willFocus = this.props.navigation.addListener(
+      'willFocus',
+      (payLoad) => {
+        console.log("Reloading Deck Detail")
+        this.handleDeckData()
+      }
+    )
 
     addCardCallback = () => {
         const { navigation } = this.props
