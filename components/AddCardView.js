@@ -7,7 +7,7 @@ import { StyleSheet,
         TouchableOpacity,
     } from 'react-native'
 import { connect } from 'react-redux'
-import { fetchDeckById } from "../utils/api";
+import { fetchDeckById, addCardToDeck } from "../utils/api";
 
 class AddCardView extends React.Component {
 
@@ -22,9 +22,17 @@ class AddCardView extends React.Component {
     }
 
     submit = () => {
-      const { question, answer } = this.state
+      console.log("CardView", question, answer);
 
-      console.log("CardView", question, answer)
+      const { deckId } = this.props.navigation.state.params;
+      const { question, answer } = this.state
+      const { navigation } = this.props
+
+      addCardToDeck(deckId)
+
+      // navigate to existing screen in stack
+      navigation.navigate("DeckDetail")
+      
     }
 
     render() {
