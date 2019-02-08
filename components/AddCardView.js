@@ -29,9 +29,12 @@ class AddCardView extends React.Component {
       const { navigation } = this.props
 
       addCardToDeck(deckId, this.state)
+        .then(() => {
+          navigation.navigate("DeckDetail")
+        })
 
       // navigate to existing screen in stack
-      navigation.navigate("DeckDetail")
+      
       
     }
 

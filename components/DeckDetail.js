@@ -27,7 +27,6 @@ class DeckDetail extends React.Component {
 
       fetchDeckById(deckId)
         .then(deck => {
-          console.log("Reloaded deck", deck)
           this.setState(() => ({
             id: deck.id,
             title: deck.title,
@@ -39,7 +38,6 @@ class DeckDetail extends React.Component {
     willFocus = this.props.navigation.addListener(
       'willFocus',
       (payLoad) => {
-        console.log("Reloading Deck Detail")
         this.handleDeckData()
       }
     )
@@ -62,6 +60,15 @@ class DeckDetail extends React.Component {
             "Decks"
           )
         })
+    }
+
+    startQuizCallback = () => {
+      const { navigation } = this.props
+      console.log("startQuiz called")
+      navigation.navigate(
+        "QuizView",
+        { deckId: this.state.id }
+      )
     }
 
     render() {
@@ -88,6 +95,7 @@ class DeckDetail extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.buttonStyle, styles.startQuiz]}
+                onPress={this.startQuizCallback}
               >
                 <Text style={{ color: "#FFF" }}>Start Quiz</Text>
               </TouchableOpacity>

@@ -11,6 +11,7 @@ import DeckView from "./DeckView";
 import AddDeckView from "./AddDeckView";
 import DeckDetail from "./DeckDetail"
 import AddCardView from "./AddCardView"
+import QuizView from "./QuizView"
 import { blue, white } from "../utils/colors";
 import { Icon } from "react-native-elements";
 
@@ -42,6 +43,15 @@ const DeckNavigator = createStackNavigator(
           tabBarLabel: "Add Card",
           header: null
         };
+      }
+    },
+    QuizView: {
+      screen: QuizView,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Quiz",
+          header: null
+        }
       }
     }
   },
