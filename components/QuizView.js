@@ -5,6 +5,7 @@ import { View,
 } from "react-native"
 import { connect } from "react-redux"
 import { fetchDeckById } from "../utils/api"
+import QuizComponent from "./QuizComponent"
 
 class QuizView extends Component {
 
@@ -56,13 +57,8 @@ class QuizView extends Component {
                 {   
                     cards.length <= 0
                     ? <Text>There are 0 cards in your deck.</Text>
-                    : null
+                    : <QuizComponent />
                 }
-                {/* {
-                    viewingQuestion === true
-                    ? <Text>{cards[curIndex].question}</Text>
-                    : <Text>{cards[curIndex].answer}</Text>
-                } */}
             </View>
         )
     }
