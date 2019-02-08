@@ -2,6 +2,13 @@ import { AsyncStorage } from 'react-native'
 
 const DECK_STORAGE_KEY = 'UdacityFlashcard:deck'
 
+// DECK OBJECT SIGNATURE:
+// id: {
+//     id, "",
+//     title, "",
+//     cards: []
+// }
+
 export function fetchDecks() {
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
         .then((result) => {
@@ -34,6 +41,15 @@ export function removeDeck(deckId) {
             const data = JSON.parse(results)
             data[deckId] = undefined
             delete data[deckId]
+            AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
+        })
+}
+
+export function addCardToDeck(deckId, card) {
+    return AsyncStorage.getItem(DECK_STORAGE_KEY)
+        .then((results) => {
+            const data = JSON.parse(results)
+            data[deckId].cards.push(card)
             AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data))
         })
 }
