@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  TouchableWithoutFeedback
 } from "react-native";
 import { connect } from "react-redux"
 
@@ -24,7 +23,7 @@ class DeckComponent extends Component {
     const { deck } = this.props;
 
     return (
-      <TouchableWithoutFeedback onPress={this.touchCallback}>
+      <TouchableOpacity onPress={this.touchCallback}>
         <View>
           <Text className="deckName" style={styles.deckName}>
             {deck.title}
@@ -33,7 +32,7 @@ class DeckComponent extends Component {
             {deck.cards.length} cards
           </Text>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     );
   }
 }
