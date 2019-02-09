@@ -16,8 +16,6 @@ class QuizView extends Component {
         curIndex: 0,
         rightAnswers: 0,
         viewingQuestion: true,
-        markAnswer: false,
-        quizOver: false,
     }
 
     componentDidMount() {
@@ -62,14 +60,27 @@ class QuizView extends Component {
         }))
     }
 
+    resetQuiz = () => {
+        this.setState(() => ({
+            curIndex: 0,
+            rightAnswers: 0,
+            viewingQuestion: true,
+        }))
+    }
+
+    returnToDeck = () => {
+        const { navigation } = this.props
+        
+        navigation.goBack()
+    }
+
     render() {
         const { id, 
             title, 
             cards, 
             curIndex, 
             viewingQuestion,
-            markAnswer, 
-            quizOver 
+            rightAnswers
         } = this.state
 
         return (
@@ -82,6 +93,9 @@ class QuizView extends Component {
                         viewingQuestion={viewingQuestion}
                         traverseQuestion={this.traverseQuestion}
                         incrementCorrect={this.incrementCorrect}
+                        rightAnswers={this.state.rightAnswers}
+                        resetQuiz={this.resetQuiz}
+                        returnToDeck={this.returnToDeck}
                         />
                 }
             </View>

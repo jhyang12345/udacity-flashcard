@@ -17,7 +17,13 @@ class QuizComponent extends Component {
     }
 
     render() {
-        const { card, viewingQuestion, traverseQuestion } = this.props
+        const { card, 
+            viewingQuestion, 
+            traverseQuestion, 
+            rightAnswers, 
+            resetQuiz,
+            returnToDeck,
+         } = this.props
         
         if (card !== undefined) {
             return (
@@ -81,11 +87,38 @@ class QuizComponent extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    <Text>Quiz Finished</Text>
+                    <Text
+                        style={[styles.question, {fontWeight: 'bold', marginBottom: 20}]}>
+                        Quiz Finished with {rightAnswers} right answers
+                    </Text>
+                    <View
+                        style={{
+                            alignSelf: 'stretch',
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
+                            alignItems: "center"
+                        }}>
+                        <TouchableOpacity
+                            style={styles.answerButton}
+                            onPress={resetQuiz}
+                        >
+                            <Text style={{ color: "#FFF" }}>
+                                Restart Quiz
+                        </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.answerButton,
+                            { marginLeft: 20 }]}
+                            onPress={returnToDeck}
+                        >
+                            <Text style={{ color: "#FFF" }}>
+                                Back to Deck
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
-
     }
 }
 
