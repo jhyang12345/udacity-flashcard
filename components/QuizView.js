@@ -40,6 +40,21 @@ class QuizView extends Component {
             })
     }
 
+    traverseQuestion = () => {
+        const { viewingQuestion, curIndex } = this.state
+
+        if(viewingQuestion) {
+            this.setState(() => ({
+                viewingQuestion: false,
+            }))
+        } else {
+            this.setState(() => ({
+                viewingQuestion: true,
+                curIndex: curIndex + 1,
+            }))
+        }
+    }
+
     render() {
         const { id, 
             title, 
@@ -50,14 +65,16 @@ class QuizView extends Component {
             quizOver 
         } = this.state
 
-        console.log("Quiz", cards)
-
         return (
             <View style={styles.container}>
                 {   
                     cards.length <= 0
                     ? <Text>There are 0 cards in your deck.</Text>
-                    : <QuizComponent />
+                    : <QuizComponent 
+                        card={cards[curIndex]}
+                        viewingQuestion={viewingQuestion}
+                        traverseQuestion={this.traverseQuestion}
+                        />
                 }
             </View>
         )

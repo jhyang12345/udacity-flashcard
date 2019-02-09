@@ -17,8 +17,6 @@ class DeckDetail extends React.Component {
     }
 
     componentDidMount() {
-      
-      console.log(fetchDeckById)
       this.handleDeckData()
     }
 
