@@ -7,18 +7,13 @@ import { StyleSheet,
         TouchableOpacity,
     } from 'react-native'
 import { connect } from 'react-redux'
-import { fetchDeckById, addCardToDeck } from "../utils/api";
+import { addCardToDeck } from "../utils/api";
 
 class AddCardView extends React.Component {
 
     state = {
         question: "",
         answer: "",
-    }
-
-    componentDidMount() {
-      const { deckId } = this.props.navigation.state.params
-      console.log("AddCardView", deckId)
     }
 
     submit = () => {
