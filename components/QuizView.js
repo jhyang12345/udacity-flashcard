@@ -14,6 +14,7 @@ class QuizView extends Component {
         title: "",
         cards: [],
         curIndex: 0,
+        rightAnswers: 0,
         viewingQuestion: true,
         markAnswer: false,
         quizOver: false,
@@ -55,6 +56,12 @@ class QuizView extends Component {
         }
     }
 
+    incrementCorrect = () => {
+        this.setState((state) => ({
+            rightAnswers: state.rightAnswers + 1,
+        }))
+    }
+
     render() {
         const { id, 
             title, 
@@ -74,6 +81,7 @@ class QuizView extends Component {
                         card={cards[curIndex]}
                         viewingQuestion={viewingQuestion}
                         traverseQuestion={this.traverseQuestion}
+                        incrementCorrect={this.incrementCorrect}
                         />
                 }
             </View>

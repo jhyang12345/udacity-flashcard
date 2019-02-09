@@ -9,68 +9,83 @@ import { connect } from "react-redux"
 class QuizComponent extends Component {
 
     confessAnswer(right) {
-        console.log("Confessed", right)
+        const { traverseQuestion, incrementCorrect } = this.props
+        
+        if(right) incrementCorrect()
+
+        traverseQuestion()
     }
 
     render() {
         const { card, viewingQuestion, traverseQuestion } = this.props
         
-        return (
-            <View style={styles.container}>
-                {
-                    (viewingQuestion)
-                    ? (
-                        <View>
-                            <Text
-                                style={styles.question}
-                            >
-                                {card.question}
-                            </Text>
-                            <TouchableOpacity
-                                onPress={traverseQuestion}
-                                style={styles.buttonStyle}>
-                                <Text
-                                    style={{color: "#FFF"}}>
-                                    Show Answer
+        if (card !== undefined) {
+            return (
+                <View style={styles.container}>
+                    {
+                        (viewingQuestion)
+                            ? (
+                                <View>
+                                    <Text
+                                        style={styles.question}
+                                    >
+                                        {card.question}
+                                    </Text>
+                                    <TouchableOpacity
+                                        onPress={traverseQuestion}
+                                        style={styles.buttonStyle}>
+                                        <Text
+                                            style={{ color: "#FFF" }}>
+                                            Show Answer
                                 </Text>
-                            </TouchableOpacity>
-                        </View>
-                        )
-                    : (
-                        <View>
-                            <Text style={styles.answer}>
-                                {card.answer}
-                            </Text>
-                            <View
-                                    style={{
-                                        alignSelf: 'stretch',
-                                        flexDirection: "row",
-                                        justifyContent: "space-evenly",
-                                        alignItems: "center"}}>
-                                <TouchableOpacity
-                                    style={styles.answerButton}
-                                    onPress={this.confessAnswer.bind(this, true)}
-                                    >
-                                    <Text style={{color: "#FFF"}}>
-                                        Right
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                            : (
+                                <View>
+                                    <Text style={styles.answer}>
+                                        {card.answer}
                                     </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={[styles.answerButton,
-                                     {marginLeft: 20}]}
-                                    onPress={this.confessAnswer.bind(this, false)}
-                                    >
-                                    <Text style={{color: "#FFF"}}
+                                    <View
+                                        style={{
+                                            alignSelf: 'stretch',
+                                            flexDirection: "row",
+                                            justifyContent: "space-evenly",
+                                            alignItems: "center"
+                                        }}>
+                                        <TouchableOpacity
+                                            style={styles.answerButton}
+                                            onPress={this.confessAnswer.bind(this, true)}
                                         >
-                                        Wrong
+                                            <Text style={{ color: "#FFF" }}>
+                                                Right
                                     </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    )
-                }
-            </View>
-        )
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                            style={[styles.answerButton,
+                                            { marginLeft: 20 }]}
+                                            onPress={this.confessAnswer.bind(this, false)}
+                                        >
+                                            <Text style={{ color: "#FFF" }}
+                                            >
+                                                Wrong
+                                    </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            )
+                    }
+                </View>
+            )
+        }
+        else {
+            return (
+                <View style={styles.container}>
+                    <Text>Quiz Finished</Text>
+                </View>
+            )
+        }
+
     }
 }
 
