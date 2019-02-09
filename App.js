@@ -7,15 +7,13 @@ import { StyleSheet,
           ToolbarAndroid,
        } from 'react-native';
 import { Header } from 'react-native-elements'
-import { createAppContainer, 
-        createBottomTabNavigator,
-        createDrawerNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { middleware } from './middleware'
 import { Constants } from 'expo'
 import { receiveDecks } from './actions'
 import reducer from './reducers'
+import { setLocalNotification } from "./utils/helpers"
 
 import AppContainer from './components/AppContainer'
 
@@ -25,6 +23,8 @@ export default class App extends React.Component {
 
   componentDidMount = () => {
     store.dispatch(receiveDecks())
+
+    setLocalNotification()
   }
 
   render() {
