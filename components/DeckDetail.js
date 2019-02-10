@@ -7,6 +7,7 @@ import { StyleSheet,
     } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchDeckById, removeDeck } from "../utils/api";
+import { clearLocalNotification } from "../utils/helpers"
 
 class DeckDetail extends React.Component {
 
@@ -63,6 +64,10 @@ class DeckDetail extends React.Component {
     startQuizCallback = () => {
       const { navigation } = this.props
       console.log("startQuiz called")
+
+      // Clear Notification if quiz starts!
+      clearLocalNotification()
+
       navigation.navigate(
         "QuizView",
         { deckId: this.state.id }
